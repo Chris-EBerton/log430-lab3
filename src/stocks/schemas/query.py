@@ -1,5 +1,5 @@
 import graphene
-from graphene import ObjectType, String, Int
+from graphene import ObjectType, String, Int, Float
 from stocks.schemas.product import Product
 from db import get_redis_conn
 
@@ -11,11 +11,12 @@ class Query(ObjectType):
         """ Create an instance of Product based on stock info for that product that is in Redis """
         redis_client = get_redis_conn()
         product_data = redis_client.hgetall(f"stock:{id}")
-        # TODO: ajoutez les colonnes name, sku, price
         if product_data:
             return Product(
-                id=id,
-                name=f"Product {id}",
+                id=int(id),
+                name=product_data.get('name', f"Product {id}"),
+                sku=product_data.get('sku'),
+                price=float(product_data['price']) if product_data.get('price') is not None else None,
                 quantity=int(product_data['quantity'])
             )
         return None

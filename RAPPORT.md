@@ -23,10 +23,25 @@ Réponse
 
 ## 4. Question 4 : Quelles lignes avez-vous changé dans update_stock_redis? Veuillez joindre du code afin d’illustrer votre réponse.
 
+Les lignes modifiées reflètent les ajouts de colonnes dans la structure de données.
+De plus, le mapping a été réajusté pour refléter le changement.
+![Comparaisons update stock redis Avant Apres Pt 1](image-2.png)
+
+![Comparaisons update stock redis Avant Apres Pt 2](image-3.png)
+
+
 ## 5. Question 5 : Quels résultats avez-vous obtenus en utilisant l’endpoint POST /stocks/graphql-query avec les améliorations ? Veuillez joindre la sortie de votre requête dans Postman afin d’illustrer votre réponse.
+
+Quoique POST n'admet pas d'erreurs avec les ajouts, le GraphQl Query ne considère pas être capable de lire, mais répond à la requête adéquatement.
+![Post GraphQL Query : error notice, but execution](image-7.png)
+
+En plus, la structure incluant les nouveaux paramètres sont reconnus dans le Product.
+![Post Product](image-5.png)
+
 
 ## 6.  Question 6 : Examinez attentivement le fichier docker-compose.yml du répertoire scripts, ainsi que celui situé à la racine du projet. Qu’ont-ils en commun ? Par quel mécanisme ces conteneurs peuvent-ils communiquer entre eux ? Veuillez joindre du code YML afin d’illustrer votre réponse.
 Réponse
+ Targets localhost : not working. Retarget to store_manager-1 (Docker)
 
 # Déploiement
 (Le cas échéant, décrivez votre pipeline CI/CD et ce que vous avez appris dans ce laboratoire en ce qui concerne le déploiement. Il est obligatoire d'ajouter du code, des captures d'écran ou des sorties de terminal pour illustrer votre réponse.)
