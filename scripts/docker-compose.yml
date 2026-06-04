@@ -11,4 +11,4 @@ services:
 networks:
   labo03-network:
     driver: bridge
-    external: true
+
