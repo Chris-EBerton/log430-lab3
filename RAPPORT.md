@@ -112,3 +112,9 @@ Cependant, les builds subséquents de cette même config échouaient.
 
 ![Failure proof 1](image-9.png)
 ![Failure proof 2](image-10.png)
+
+Aussi: le problème précédent de permissions du CD après le  1e envoi fonctionnel demeure:
+
+![Self hosted CD message](image-21.png)
+
+![CD log](image-22.png)
