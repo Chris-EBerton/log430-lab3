@@ -48,11 +48,33 @@ Le point commun entre les docker-compose est le network. Les deux fichiers spéc
 # Déploiement
 (Le cas échéant, décrivez votre pipeline CI/CD et ce que vous avez appris dans ce laboratoire en ce qui concerne le déploiement. Il est obligatoire d'ajouter du code, des captures d'écran ou des sorties de terminal pour illustrer votre réponse.)
 
+Ce laboratoire a permis de comprendre la connexion entre 2 services en passant par un réseau commun
+
 Au premier lancement de la config présente dans le commit Task 6 : Done. TODO : extra, la communication entre supplier_app.py et store_manager fonctionnait.
 ```
-supplier_app-1 | 2026-06-04 22:34:02,396 - ERROR - Connection error on attempt 1 supplier_app-1 | 2026-06-04 22:34:04,397 - INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 2/3) supplier_app-1 | 2026-06-04 22:34:08,416 - INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:08,416 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:08,417 - INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:18,418 - INFO - --- Call #2 --- supplier_app-1 | 2026-06-04 22:34:18,420 - INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:18,431 - INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:18,432 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:18,432 - INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:28,431 - INFO - --- Call #3 --- supplier_app-1 | 2026-06-04 22:34:28,433 - INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:28,446 - INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:28,447 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:28,447 - INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:38,449 - INFO - --- Call #4 --- supplier_app-1 | 2026-06-04 22:34:38,450 - INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:38,458 - INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:38,459 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:38,459 - INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:48,460 - INFO - --- Call #5 --- supplier_app-1 | 2026-06-04 22:34:48,461 - INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:48,469 - INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:48,470 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:48,472 - INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:58,472 - INFO - --- Call #6 --- supplier_app-1 | 2026-06-04 22:34:58,473 - INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:58,481 - INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:58,482 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null}
+supplier_app-1 | 2026-06-04 22:34:02,396 - ERROR - Connection error on attempt 1 supplier_app-1 | 2026-06-04 22:34:04,397 - INFO 
+- Calling http://store_manager:5000/stocks/graphql-query (attempt 2/3) supplier_app-1 | 2026-06-04 22:34:08,416 - INFO - Response: 200 - OK 
+supplier_app-1 | 2026-06-04 22:34:08,416 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:08,417 
+- INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:18,418 
+- INFO - --- Call #2 --- supplier_app-1 | 2026-06-04 22:34:18,420 
+- INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:18,431 
+- INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:18,432 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:18,432 
+- INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:28,431 - INFO - --- Call #3 --- supplier_app-1 | 2026-06-04 22:34:28,433 
+- INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:28,446 
+- INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:28,447 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:28,447 
+- INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:38,449 - INFO - --- Call #4 --- supplier_app-1 | 2026-06-04 22:34:38,450 - INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:38,458 
+- INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:38,459 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:38,459 
+- INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:48,460 
+- INFO - --- Call #5 --- supplier_app-1 | 2026-06-04 22:34:48,461 
+- INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:48,469 
+- INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:48,470 - INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null} supplier_app-1 | ... supplier_app-1 | 2026-06-04 22:34:48,472 
+- INFO - Waiting 10 seconds until next call... supplier_app-1 | 2026-06-04 22:34:58,472 
+- INFO - --- Call #6 --- supplier_app-1 | 2026-06-04 22:34:58,473
+- INFO - Calling http://store_manager:5000/stocks/graphql-query (attempt 1/3) supplier_app-1 | 2026-06-04 22:34:58,481 
+- INFO - Response: 200 - OK supplier_app-1 | 2026-06-04 22:34:58,482 
+- INFO - Response body: {"data":{"product":{"id":1,"name":"Laptop ABC","quantity":56}},"errors":null}
 ```
 Cependant, les builds subséquents de cette même config échouaient.
-```
 
-```
+![Failure proof 1](image-9.png)
+![Failure proof 2](image-10.png)

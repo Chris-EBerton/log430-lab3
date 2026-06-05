@@ -28,12 +28,12 @@ jobs:
 
       - name: Restart app
         run: |
-          docker compose \
+          docker-compose \
             -f docker-compose.yml \
             -f docker-compose.prod.yml \
             down
 
-          docker compose \
+          docker-compose \
             -f docker-compose.yml \
             -f docker-compose.prod.yml \
             up -d --build
