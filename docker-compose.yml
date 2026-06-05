@@ -26,7 +26,7 @@ services:
     networks:
       - labo03-network
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./db-init:/docker-entrypoint-initdb.d
@@ -43,7 +43,7 @@ services:
     networks:
       - labo03-network
     ports:
-      - "6379:6379"
+      - "6380:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 15s
