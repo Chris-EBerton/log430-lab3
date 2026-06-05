@@ -8,18 +8,43 @@
 
 ##  Question 1 : Dans la RFC 7231, nous trouvons que certaines méthodes HTTP sont considérées comme sûres (safe) ou idempotentes, en fonction de leur capacité à modifier (ou non) l'état de l'application. Lisez les sections 4.2.1 et 4.2.2 de la RFC 7231 et répondez : parmi les méthodes mentionnées dans l'activité 2, lesquelles sont sûres, non sûres, idempotentes et/ou non idempotentes?
 Safe -> read only. Exemples :  GET, HEAD, OPTIONS, and TRACE
-Unsafe -> risque
+Unsafe -> write. Modifie base données. PATCH, CONNECT, POST PUT, DELETE
 
-![Pytest success](image.png)
+Idempotentes : Exemple : PUT, DELETE, GET,
+Non-Idempotent :  POST, PATCH and CONNECT.
+
+Les méthodes du test_stock_flow() considérés non sûres et non idempotents sont Post,
+![Post test_stock_flow](image-15.png)
+
+![Post app](image-16.png)
+alors que les méthodes sûres sont Get.
+
+![Get test_flow](image-17.png)
+
+![Get app](image-18.png)
+
+Finalement, les méthodes Delete et Get sont idempotentes. 
+
+![Delete test_stock_flow](image-11.png)
+
+![Delete app](image-12.png)
+
+![Get test_stock_flow](image-13.png)
+![Get app](image-14.png)
+
+
 
 ## 2. Question 2 : Décrivez l'utilisation de la méthode join dans ce cas. Utilisez les méthodes telles que décrites à Simple Relationship Joins et Joins to a Target with an ON Clause dans la documentation SQLAlchemy pour ajouter les colonnes demandées dans cette activité. Veuillez inclure le code pour illustrer votre réponse.
 
+La méthode join crée un tableau qui regroupe les informations du stock d'un produit (défini par son id) aux autres informations du produit présents dans la table Product en recherchant les informations associées à l'id du stock mentionné.
+
+![Join](image-19.png)
 
 ## 3. Question 3 : Quels résultats avez-vous obtenus en utilisant l’endpoint POST /stocks/graphql-query avec la requête suggérée ? Veuillez joindre la sortie de votre requête dans Postman afin d’illustrer votre réponse.
-Réponse
+
+L'endpoint POST /stocks/graphql-query affiche les données associées aux colonnes spécifiées.
 
 ![Resultat Postman](image-1.png)
- # Potentiellement : passe pas : 1 item 9, mais pas 8 premiers. Redis ne s'update pas à temps.
 
 ## 4. Question 4 : Quelles lignes avez-vous changé dans update_stock_redis? Veuillez joindre du code afin d’illustrer votre réponse.
 
@@ -35,7 +60,8 @@ De plus, le mapping a été réajusté pour refléter le changement.
 Quoique POST n'admet pas d'erreurs avec les ajouts, le GraphQl Query ne considère pas être capable de lire, mais répond à la requête adéquatement.
 ![Post GraphQL Query : error notice, but execution](image-7.png)
 
-En plus, la structure incluant les nouveaux paramètres sont reconnus dans le Product.
+En plus, la structure incluant les nouveaux paramètres existe dans le Product.
+
 ![Post Product](image-5.png)
 
 
@@ -49,6 +75,14 @@ Le point commun entre les docker-compose est le network. Les deux fichiers spéc
 (Le cas échéant, décrivez votre pipeline CI/CD et ce que vous avez appris dans ce laboratoire en ce qui concerne le déploiement. Il est obligatoire d'ajouter du code, des captures d'écran ou des sorties de terminal pour illustrer votre réponse.)
 
 Ce laboratoire a permis de comprendre la connexion entre 2 services en passant par un réseau commun
+et de communiquer avec un front-end
+![Pytest success](image.png)
+
+Les configurations de CI/CD sont largement inchangés de la configuration par défaut.
+
+![CI/CD config](image-20.png)
+
+Le changement majeur est la configuration réseau des docker-compose (voir image Question 6).
 
 Au premier lancement de la config présente dans le commit Task 6 : Done. TODO : extra, la communication entre supplier_app.py et store_manager fonctionnait.
 ```
