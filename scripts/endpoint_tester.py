@@ -5,6 +5,10 @@ Auteurs : Gabriel C. Ullmann, Fabio Petrillo, 2025
 """
 import time
 import requests
+import urllib3
+
+# Suppress SSL warnings for self-signed certificates
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class EndpointTester:
     """ A class that contains method to periodically call a specified endpoint with error handling and logging """
@@ -32,7 +36,8 @@ class EndpointTester:
                     data=self.payload,
                     headers={
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    verify=False
                 )
                 
                 # Log response details

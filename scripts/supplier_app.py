@@ -11,7 +11,7 @@ from endpoint_tester import EndpointTester
 # Test parameters
 ENDPOINT_URL = "http://store-manager:5000/stocks/graphql-query"
 # For local testing: http://localhost:5000/stocks/graphql-query
-TEST_PAYLOAD = "{\"query\":\"{\\n  product(id: \\\"1\\\") {\\n    id\\n    name\\n    quantity\\n  }\\n}\\n\",\"variables\":{}}"
+TEST_PAYLOAD = "{\"query\":\"{\\n  product(id: \\\"1\\\") {\\n    id\\n    name\\n    sku\\n    price\\n    quantity\\n  }\\n}\\n\",\"variables\":{}}"
 INTERVAL_SECONDS = 10  
 TIMEOUT_SECONDS = 10   
 MAX_RETRIES = 3  
